@@ -1,13 +1,12 @@
 from typing import Tuple
 
-def get_sum(a: int, b: int) -> int:
-    # Здесь реализация вашего решения
-    pass
+
+def get_sum(arr: Tuple) -> int:
+    return sum(arr)
+
 
 def read_input() -> Tuple[int, int]:
-    a = int(input())
-    b = int(input())
-    return a, b
+    return int(input()), int(input())
 
-a, b = read_input()
-print(get_sum(a, b))
+
+print(get_sum(read_input()))

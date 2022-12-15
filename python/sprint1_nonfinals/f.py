@@ -1,5 +1,7 @@
 def is_palindrome(line: str) -> bool:
-    # Здесь реализация вашего решения
-    pass
+    table = str.maketrans('ab', 'ab', """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ """,)
+    line = line.lower().translate(table)
+    return line == line[::-1]
 
-print(is_palindrome(input().strip()))
+
+print(is_palindrome('zo'.strip(',')))

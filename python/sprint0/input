@@ -1,0 +1,3 @@
+line = 'i love segment tree'.strip()
+line = line.split()
+print(line)
