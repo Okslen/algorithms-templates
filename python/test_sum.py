@@ -1,10 +1,10 @@
 import timeit
 from itertools import zip_longest
 
-BASE = 10
-first = '999'
-second = '111'
-iteration = 1000000
+BASE = 2
+first = '100110010'
+second = '100101'
+iteration = 100000
 
 
 def get_sum_sum(first_number: str, second_number: str, base: int) -> str:
@@ -18,7 +18,8 @@ def get_sum_sum(first_number: str, second_number: str, base: int) -> str:
         amount = sum(couple) + reminder
         result.append(str(amount % base))
         reminder = amount // base
-    result.append(str(reminder))
+    if reminder:
+        result.append(str(reminder))
     return ''.join(result[::-1])
 
 
@@ -33,7 +34,8 @@ def get_sum_plus_map(first_number: str, second_number: str, base: int) -> str:
         amount = i + j + reminder
         result.append(str(amount % base))
         reminder = amount // base
-    result.append(str(reminder))
+    if reminder:
+        result.append(str(reminder))
     return ''.join(result[::-1])
 
 
@@ -46,7 +48,8 @@ def get_sum_plus(first_number: str, second_number: str, base: int) -> str:
         amount = int(i) + int(j) + reminder
         result.append(str(amount % base))
         reminder = amount // base
-    result.append(str(reminder))
+    if reminder:
+        result.append(str(reminder))
     return ''.join(result[::-1])
 
 
@@ -59,7 +62,8 @@ def get_sum_plus_str(first_number: str, second_number: str, base: int) -> str:
         amount = int(i) + int(j) + reminder
         result = str(amount % base) + result
         reminder = amount // base
-    result = str(reminder) + result
+    if reminder:
+        return str(reminder) + result
     return result
 
 
