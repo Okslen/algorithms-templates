@@ -1,4 +1,4 @@
-# 80188586
+# 80193522
 
 from typing import Tuple
 
@@ -24,5 +24,6 @@ def read_input() -> Tuple[int, Tuple[int, ...]]:
     return keys_count, tuple(i for row in numbers for i in row)
 
 
-keys_count, numbers = read_input()
-print(str(get_max_points(keys_count, numbers)))
+if __name__ == '__main__':
+    keys_count, numbers = read_input()
+    print(str(get_max_points(keys_count, numbers)))

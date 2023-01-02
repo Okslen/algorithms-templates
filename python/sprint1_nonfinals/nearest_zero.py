@@ -1,4 +1,4 @@
-# 80187326
+# 80193566
 
 from typing import List, Tuple
 
@@ -44,21 +44,17 @@ def get_steps_count_between(
 
 def get_nearest_zero(length: int, numbers: Tuple[int, ...]) -> List[int]:
     zero_indexes = get_zero_indexes(length, numbers)
-    return get_steps_count_after(
-        length,
-        get_steps_count_between(
-            get_steps_count_before(
-                [0] * length,
-                zero_indexes),
-            zero_indexes),
-        zero_indexes)
+    steps_count = get_steps_count_before([0] * length, zero_indexes)
+    steps_count = get_steps_count_between(steps_count, zero_indexes)
+    return get_steps_count_after(length, steps_count, zero_indexes)
 
 
 def read_input() -> Tuple[int, Tuple[int, ...]]:
     length = int(input())
-    numbers = tuple(map(int, input().strip().split()))
+    numbers = tuple(int(number) for number in input().strip().split())
     return length, numbers
 
 
-length, numbers = read_input()
-print(' '.join(map(str, get_nearest_zero(length, numbers))))
+if __name__ == '__main__':
+    length, numbers = read_input()
+    print(*map(str, get_nearest_zero(length, numbers)))
