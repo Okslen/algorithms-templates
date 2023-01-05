@@ -1,28 +1,23 @@
-# 80297898
-from typing import List, Union
+# 80301983
+from typing import List
 
-BINARY_OPERATORS = set(('+', '-', '*', '/'))
+BINARY_OPERATORS = {
+    '+': lambda x, y: y + x,
+    '-': lambda x, y: y - x,
+    '*': lambda x, y: y * x,
+    '/': lambda x, y: y // x,
+}
 
 
 class Stack:
     def __init__(self) -> None:
-        self.items: List[Union[int, None]] = []
+        self.__items__: List[int] = []
 
     def push(self, item: int):
-        self.items.append(item)
+        self.__items__.append(item)
 
     def pop(self):
-        return self.items.pop() if self.items else None
-
-
-def get_result(first_arg: int, second_arg: int, operator: str) -> int:
-    if operator == '+':
-        return first_arg + second_arg
-    if operator == '-':
-        return first_arg - second_arg
-    if operator == '*':
-        return first_arg * second_arg
-    return first_arg // second_arg
+        return self.__items__.pop() if self.__items__ else None
 
 
 def calculate(impression: List[str]) -> int:
@@ -30,10 +25,9 @@ def calculate(impression: List[str]) -> int:
     for element in impression:
         if element in BINARY_OPERATORS:
             arguments.push(
-                get_result(
-                    second_arg=arguments.pop(),
-                    first_arg=arguments.pop(),
-                    operator=element
+                BINARY_OPERATORS[element](
+                    arguments.pop(),
+                    arguments.pop()
                 )
             )
         else:
@@ -41,9 +35,9 @@ def calculate(impression: List[str]) -> int:
     return arguments.pop()
 
 
+def read_input() -> List[str]:
+    return input().strip().split()
+
+
 if __name__ == '__main__':
-
-    def read_input() -> List[str]:
-        return input().strip().split()
-
     print(calculate(read_input()))
