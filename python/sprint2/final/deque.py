@@ -1,4 +1,4 @@
-# 80291422
+# 80291451
 from typing import List, Optional, Tuple, Union
 
 ERROR_MESSAGE = 'error'
@@ -51,9 +51,6 @@ class MyDequeSized:
         self.deque[self.tail] = None
         self.current_size -= 1
         return deleted
-
-    def size(self) -> int:
-        return self.current_size
 
 
 if __name__ == '__main__':
