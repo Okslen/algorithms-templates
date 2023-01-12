@@ -1,4 +1,4 @@
-# 80301983
+# 80670009
 from typing import List
 
 BINARY_OPERATORS = {
@@ -11,13 +11,13 @@ BINARY_OPERATORS = {
 
 class Stack:
     def __init__(self) -> None:
-        self.__items__: List[int] = []
+        self.__items: List[int] = []
 
     def push(self, item: int):
-        self.__items__.append(item)
+        self.__items.append(item)
 
     def pop(self):
-        return self.__items__.pop() if self.__items__ else None
+        return self.__items.pop() if self.__items else None
 
 
 def calculate(impression: List[str]) -> int:
