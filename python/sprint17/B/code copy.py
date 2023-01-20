@@ -5,18 +5,19 @@ LETTERS = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
 
 
 def letter_combinations(
-    n: int, prefix: str, numbers: str, result: List[str]
+    n: int, numbers: str, prefix: str = '', result: List[str] = []
 ) -> List[str]:
     if n == 0:
         result.append(prefix)
         return result
     else:
-        for number in numbers:
+        for i in range(len(numbers)):
+            number = numbers[i]
             for letter in LETTERS[number]:
                 letter_combinations(n - 1, prefix + letter, numbers, result)
     return result
 
 
 if __name__ == '__main__':
-    prefix = input()
-    print(letter_combinations(len(prefix), '', prefix, []), sep='\n')
+    numbers = input()
+    print(letter_combinations(len(numbers), '', numbers, []))
