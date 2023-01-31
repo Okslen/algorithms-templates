@@ -1,3 +1,4 @@
+# 81633448
 from typing import List, Tuple
 
 
@@ -25,7 +26,7 @@ def in_place_quick_sort(arr: List[Tuple[int, int, str]],
             right -= 1
         else:
             arr[left], arr[right] = arr[right], arr[left]
-    index_pivot = arr.index(pivot)
+    index_pivot = arr.index(pivot, begin, end + 1)
     in_place_quick_sort(arr, begin, index_pivot - 1)
     in_place_quick_sort(arr, index_pivot + 1, end)
     return
