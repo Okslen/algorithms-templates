@@ -30,7 +30,7 @@ def broken_search(arr: List[int], finding_value: int) -> int:
 
 
 def test():
-    arr = [7, 8, 9, 10, 0, 1, 2, 3, 4, 5, 6,]
+    arr = [7, 8, 9, 10, 0, 1, 2, 3, 4, 5, 6]
     assert broken_search(arr, 6) == 10
 
 

@@ -1,0 +1,47 @@
+from typing import List, Tuple
+
+
+def get_pivot(arr: List[Tuple[int, int, str]],
+              left: int, right: int) -> Tuple[int, int, str]:
+    min, median, max = arr[left], arr[(left + right) // 2], arr[right]
+    while not min <= median <= max:
+        if median < min:
+            min, median = median, min
+        if max < median:
+            median, max = max, median
+    return median
+
+
+def in_place_quick_sort(arr: List[Tuple[int, int, str]],
+                        begin: int, end: int) -> None:
+    if end - begin < 1:
+        return
+    pivot = get_pivot(arr, begin, end)
+    left, right = begin, end
+    while left != right:
+        if arr[left] < pivot:
+            left += 1
+        elif arr[right] > pivot:
+            right -= 1
+        else:
+            arr[left], arr[right] = arr[right], arr[left]
+    index_pivot = arr.index(pivot)
+    in_place_quick_sort(arr, begin, index_pivot - 1)
+    in_place_quick_sort(arr, index_pivot + 1, end)
+    return
+
+
+def read_input() -> List[Tuple[int, int, str]]:
+    participant_count = int(input())
+    result = []
+    for _ in range(participant_count):
+        data = input().strip().split()
+        result.append((-int(data[1]), int(data[2]), data[0]))
+    return result
+
+
+if __name__ == '__main__':
+    participants = read_input()
+    in_place_quick_sort(participants, 0, len(participants) - 1)
+    for participant in participants:
+        print(participant[2])
