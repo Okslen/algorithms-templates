@@ -1,9 +1,30 @@
-# 81633448
-from typing import List, Tuple
+# 81655980
+from typing import List
 
 
-def get_pivot(arr: List[Tuple[int, int, str]],
-              left: int, right: int) -> Tuple[int, int, str]:
+class Participant:
+    name: str
+    tasks: int
+    fine: int
+
+    def __init__(self, name: str, tasks: str, fine: str) -> None:
+        self.name = name
+        self.tasks = int(tasks)
+        self.fine = int(fine)
+
+    def __lt__(self, other) -> bool:
+        return (self.tasks > other.tasks if self.tasks != other.tasks else
+                self.fine < other.fine if self.fine != other.fine else
+                self.name < other.name)
+
+    def __le__(self, other) -> bool:
+        return self == other or self.__lt__(other)
+
+    def __repr__(self) -> str:
+        return f'({self.name}, задач {self.tasks}, штраф {self.fine})'
+
+
+def get_pivot(arr: List[Participant], left: int, right: int) -> Participant:
     min, median, max = arr[left], arr[(left + right) // 2], arr[right]
     while not min <= median <= max:
         if median < min:
@@ -13,8 +34,7 @@ def get_pivot(arr: List[Tuple[int, int, str]],
     return median
 
 
-def in_place_quick_sort(arr: List[Tuple[int, int, str]],
-                        begin: int, end: int) -> None:
+def in_place_quick_sort(arr: List[Participant], begin: int, end: int) -> None:
     if end - begin < 1:
         return
     pivot = get_pivot(arr, begin, end)
@@ -22,27 +42,23 @@ def in_place_quick_sort(arr: List[Tuple[int, int, str]],
     while left != right:
         if arr[left] < pivot:
             left += 1
-        elif arr[right] > pivot:
+        elif pivot < arr[right]:
             right -= 1
         else:
             arr[left], arr[right] = arr[right], arr[left]
     index_pivot = arr.index(pivot, begin, end + 1)
     in_place_quick_sort(arr, begin, index_pivot - 1)
     in_place_quick_sort(arr, index_pivot + 1, end)
-    return
 
 
-def read_input() -> List[Tuple[int, int, str]]:
+def read_input() -> List[Participant]:
     participant_count = int(input())
-    result = []
-    for _ in range(participant_count):
-        data = input().strip().split()
-        result.append((-int(data[1]), int(data[2]), data[0]))
-    return result
+    return [Participant(*input().strip().split())
+            for _ in range(participant_count)]
 
 
 if __name__ == '__main__':
     participants = read_input()
     in_place_quick_sort(participants, 0, len(participants) - 1)
     for participant in participants:
-        print(participant[2])
+        print(participant.name)
